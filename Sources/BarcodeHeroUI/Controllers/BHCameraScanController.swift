@@ -298,7 +298,10 @@
             focusAreaView.helpLabel.text = nil
             
             let cutoutFrame = focusAreaView.cutoutView.convert(focusAreaView.cutoutView.bounds, to: view)
-            backgroundView.mask(cutoutFrame, invert: true, cornerRadius: self.cutoutCornerRadius)
+            UIView.animateWithDisplayLink(duration: 0.2, animationHandler: { [weak self] percent in
+                guard let self else { return }
+                self.backgroundView.mask(cutoutFrame, invert: true, cornerRadius: self.cutoutCornerRadius)
+            }, completionHandler: nil)
         }
     }
     
